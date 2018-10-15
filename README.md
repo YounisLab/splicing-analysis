@@ -1,0 +1,5 @@
+# splicing-analysis
+
+## Building
+
+## Running
