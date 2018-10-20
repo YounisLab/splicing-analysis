@@ -2,7 +2,6 @@ FROM continuumio/miniconda:4.5.11
 
 WORKDIR /home
 
-RUN conda config --add channels anaconda
 RUN conda config --add channels bioconda
 
 COPY requirements.txt /home
