@@ -140,7 +140,7 @@ def build_fpkm_table(fpkm_file):
 
         if gene_name in table:
             print (">> gene.fpkm_tracking has duplicate genes! Exiting...")
-            exit()
+            exit(1)
 
         table[gene_name] = {"fpkm": fpkm}
 
@@ -165,7 +165,7 @@ def build_gene_length_table(gene_file):
 
         if gene_name in table:
             print(">> gene length file has duplicate rows! Exiting...")
-            exit()
+            exit(1)
 
         table[gene_name] = {"length": length}
 
@@ -193,7 +193,7 @@ def build_mrna_table(mrna_file):
 
         if gene_ID in table:
             print( ">> Duplicate gene_ID in %s. Exiting..." % mrna_file.name)
-            exit()
+            exit(1)
 
         table[gene_ID] = {"length": mrna_length}
 
@@ -363,7 +363,7 @@ def check_intron_integrity(intron_line, intron_key,
         print (">> junc_start == up_exon_start <= up_exon_stop <= intron_start <= intron_stop <= down_exon_start <= down_exon_stop == junc_stop")
         print (">> %s == %s <= %s <= %s <= %s <= %s <= %s == %s" % \
        (junc_start , up_exon_start , up_exon_stop , intron_start , intron_stop , down_exon_start , down_exon_stop , junc_stop))
-        exit()
+        exit(1)
 
 def compute_total_cvg(refgene_file, output_file):
     """
@@ -447,7 +447,7 @@ def do_analysis(intron_file, exon_table,
             exon_exon_junc_table_key = "exon-exon:%s:%d:%s" % (gene_ID, int(intron_number) + 1, intron_number)
             if exon_exon_junc_table_key not in exon_exon_junc_table:
                 print (">> %s does not have flanking junctions! Exiting..." % exon_exon_junc_table_key)
-                exit()
+                exit(1)
 
         intron_reads = splitted[10].strip()
         intron_length = str(abs(int(splitted[1]) - int(splitted[2])))

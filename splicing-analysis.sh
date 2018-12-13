@@ -15,7 +15,7 @@ then
 
 eg: splicing-analysis /home/data/hg38_ref/ ./accepted_hits.bam ./junctions.bed ./genes.fpkm hg38 MCF7
     "
-    exit
+    exit 1
 fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
