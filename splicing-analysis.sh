@@ -18,7 +18,9 @@ eg: splicing-analysis /home/data/hg38_ref/ ./accepted_hits.bam ./junctions.bed .
     exit
 fi
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
 echo "======> Computing coverage..."
-./src/compute_coverage.sh $1 $2 $3 $5 $6
+$DIR/src/compute_coverage.sh $1 $2 $3 $5 $6
 echo "======> Analyzing splice sites..."
-python ./src/analyze.py $1 $4 $5 $6
+python $DIR/src/analyze.py $1 $4 $5 $6
