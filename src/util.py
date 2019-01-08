@@ -133,13 +133,12 @@ def build_fpkm_table_from_stringtie(fpkm_file):
     fpkm_file.seek(0)
     for line in fpkm_file.readlines():
         splitted = line.split("\t")
-        gene_name = splitted[1].strip()
-        if gene_name == '-':
-            pass
+        gene_name = splitted[0].strip()
         fpkm = splitted[7].strip()
 
         if gene_name in table:
             print (">> stringtie file has duplicate genes! Exiting...")
+            print (gene_name)
             exit(1)
 
         table[gene_name] = {"fpkm": fpkm}
