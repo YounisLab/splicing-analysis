@@ -120,9 +120,35 @@ def build_exon_intron_table(exon_wao, intron_wao, chr_file):
 
     return table
 
-def build_fpkm_table(fpkm_file):
+def build_fpkm_table_from_stringtie(fpkm_file):
     """
-    Takes fpkm file and builds a preprocessing
+    Takes fpkm file from stringtie and builds a preprocessing
+    table.
+
+    Args:
+         fpkm_file: open handle to gene_abund.tab file from
+                    stringtie
+    """
+    table = {}
+    fpkm_file.seek(0)
+    for line in fpkm_file.readlines():
+        splitted = line.split("\t")
+        gene_name = splitted[1].strip()
+        if gene_name == '-':
+            pass
+        fpkm = splitted[7].strip()
+
+        if gene_name in table:
+            print (">> stringtie file has duplicate genes! Exiting...")
+            exit(1)
+
+        table[gene_name] = {"fpkm": fpkm}
+
+    return table
+
+def build_fpkm_table_from_cufflinks(fpkm_file):
+    """
+    Takes fpkm file from cufflinks and builds a preprocessing
     table.
 
     Note that fpkm values should be the 10th column.

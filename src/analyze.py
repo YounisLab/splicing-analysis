@@ -68,7 +68,7 @@ exon_exon_t = util.build_junc_table(exon_exon_cvg)
 print ">> Building exon-intron junction tables..."
 exon_intron_t = util.build_exon_intron_table(exon_wao_cvg, intron_wao_cvg, chr_file)
 print ">> Building gene_fpkm tables..."
-fpkm_t = util.build_fpkm_table(open(args.fpkm_arg))
+fpkm_t = util.build_fpkm_table_from_stringtie(open(args.fpkm_arg))
 print ">> Building gene length tables..."
 gene_length_t = util.build_gene_length_table(open("%s/%s_gene_length.txt" % (args.ref_dir, args.hg_arg)))
 print ">> Building mrna tables..."
