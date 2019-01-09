@@ -11,8 +11,3 @@ COPY requirements.txt /home
 RUN conda install --yes --file requirements.txt
 
 COPY . /home
-
-ENV PATH /home/src:$PATH
-
-RUN chmod +x /home/src/compute_coverage.sh && \
-    chmod +x splicing-analysis.sh
