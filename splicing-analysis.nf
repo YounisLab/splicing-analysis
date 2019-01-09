@@ -48,7 +48,13 @@ if (!params.sample_name) {
     exit 1, "Please specify OUT_SAMPLE_NAME."
 }
 
-process analysis {
+process analysis {	
+
+    input:
+     file ref_dir from Channel.fromPath(params.ref_dir).collect()    
+     file bam_file from Channel.fromPath(params.bam_file)
+     file junc_bed from Channel.fromPath(params.junc_bed)
+     file fpkm from Channel.fromPath(params.fpkm)
 
     output:
     file("${params.sample_name}_intron_analysis.txt") into ANALYSIS_DIR_1
@@ -59,9 +65,9 @@ process analysis {
     script:
     """
     echo "===> Computing coverage..."
-    compute_coverage.sh $params.ref_dir $params.bam_file $params.junc_bed $params.genome $params.sample_name
+    compute_coverage.sh $ref_dir $bam_file $junc_bed $params.genome $params.sample_name
     echo "===> Performing analysis..."
-    python analyze.py $params.ref_dir $params.fpkm $params.genome $params.sample_name
+    analyze.py $ref_dir $fpkm $params.genome $params.sample_name
     """
 }
 
