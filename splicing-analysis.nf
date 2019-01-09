@@ -19,7 +19,7 @@ def helpMessage() {
         GENOME_VERSION      Human Genome version prefix used in REF_DIR files
         OUT_SAMPLE_NAME     Name of output directory
 
-eg: nextflow run splicing-analysis.nf --ref_dir /home/data/hg38_ref/ --bam_file ./accepted_hits.bam --junc_bed ./junctions.bed --fpkm ./genes.fpkm --genome hg38 --out MCF7
+eg: nextflow run splicing-analysis.nf --ref_dir /home/data/hg38_ref/ --bam_file ./accepted_hits.bam --junc_bed ./junctions.bed --fpkm ./genes.fpkm --genome hg38 --sample_name MCF7
     """
 }
 
