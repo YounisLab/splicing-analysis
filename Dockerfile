@@ -1,11 +1,18 @@
 FROM continuumio/miniconda:4.5.11
+MAINTAINER Fadhil Abubaker
 
 WORKDIR /home
 
-RUN conda config --add channels bioconda
+RUN conda config --add channels bioconda && \
+    conda config --add channels conda-forge
 
 COPY requirements.txt /home
 
 RUN conda install --yes --file requirements.txt
 
-CMD ["/bin/bash"]
+COPY . /home
+
+ENV PATH /home/src:$PATH
+
+RUN chmod +x /home/src/compute_coverage.sh && \
+    chmod +x splicing-analysis.sh
