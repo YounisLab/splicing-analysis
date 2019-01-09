@@ -12,10 +12,8 @@ docker image build -t splicing-analysis .
 
 ## Running
 
-### Without Docker:
-
 ```
-Usage: splicing-analysis <REF_DIR> <BAM_FILE> <JUNCTIONS_BED> <FPKM_FILE> <GENOME_VERSION> <OUT_SAMPLE_NAME>
+Usage: nextflow run splicing-analysis.nf --ref_dir <REF_DIR> --bam_file <BAM_FILE> --junc_bed <JUNCTIONS_BED> ---fpkm <FPKM_FILE> --genome <GENOME_VERSION> --sample_name <OUT_SAMPLE_NAME>
 
         REF_DIR             Directory containing reference files
         BAM_FILE            BAM file containing reads
@@ -24,13 +22,6 @@ Usage: splicing-analysis <REF_DIR> <BAM_FILE> <JUNCTIONS_BED> <FPKM_FILE> <GENOM
         GENOME_VERSION      Human Genome version prefix used in REF_DIR files
         OUT_SAMPLE_NAME     Name of output directory
 
-```
-
-## Development
+eg: nextflow run splicing-analysis.nf --ref_dir /home/data/hg38_ref/ --bam_file ./accepted_hits.bam --junc_bed ./junctions.bed --fpkm ./genes.fpkm --genome hg38 --sample_name MCF7
 
 ```
-docker run -it --rm -v $PWD:/home/ splicing-analysis
-```
-
-This maps the current directory to a folder inside the container. This makes it
-so that there is no need to re-build the image upon making source code changes.
