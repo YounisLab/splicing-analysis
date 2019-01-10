@@ -1,5 +1,5 @@
 FROM continuumio/miniconda:4.5.11
-MAINTAINER Fadhil Abubaker
+LABEL maintainer="Fadhil Abubaker"
 
 WORKDIR /home
 
