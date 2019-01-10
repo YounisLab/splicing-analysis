@@ -11,3 +11,5 @@ COPY requirements.txt /home
 RUN conda install --yes --file requirements.txt
 
 COPY . /home
+
+ENV PATH "$PATH:/home/bin"
