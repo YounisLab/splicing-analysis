@@ -42,26 +42,26 @@ parser.add_argument("sample_name", help="Sample name used in compute_coverage.sh
 args = parser.parse_args()
 
 # Open coverage files
-print ">> Opening coverage files..."
+print(">> Opening coverage files...")
 
 cvg_base = args.sample_name + "_cvg" + "/" + args.sample_name
-print "> Opening exons_cvg..."
+print("> Opening exons_cvg...")
 exons_cvg = open(cvg_base + "_exon_cvg.bed")
-print "> Opening introns_cvg..."
+print("> Opening introns_cvg...")
 introns_cvg = open(cvg_base + "_intron_cvg.bed")
-print "> Opening exon_exon_cvg..."
+print("> Opening exon_exon_cvg...")
 exon_exon_cvg = open(cvg_base + "_exon_exon_cvg.bed")
-print "> Opening exon_wao_cvg..."
+print("> Opening exon_wao_cvg...")
 exon_wao_cvg = open(cvg_base + "_exon_wao_cvg.bed")
-print "> Opening intron_wao_cvg..."
+print("> Opening intron_wao_cvg...")
 intron_wao_cvg = open(cvg_base + "_intron_wao_cvg.bed")
-print "> Opening full_cvg.bed..."
+print("> Opening full_cvg.bed...")
 total_cvg = open(cvg_base + "_full_cvg.bed")
-print "> Opening chr_file..."
+print("> Opening chr_file...")
 chr_file = open(args.sample_name + "_cvg" + "/" + args.hg_arg + "_only_exons_refGene_longest_sorted.bed")
 
-print ">> Processing sample " + args.sample_name
-print ">> Running gene-id mapper..."
+print(">> Processing sample " + args.sample_name)
+print(">> Running gene-id mapper...")
 
 geneid_map = open(args.ref_dir + "/" + args.hg_arg + ".gene_name_refseqid")
 
@@ -70,23 +70,23 @@ geneid_map = open(args.ref_dir + "/" + args.hg_arg + ".gene_name_refseqid")
 # util.append_id(geneid_map, exon_exon_2junc_f, 21)
 introns_id_f = util.append_id(geneid_map, introns_cvg, 9)
 
-print ">> Building exon tables..."
+print(">> Building exon tables...")
 exon_t = util.build_cvg_table(exons_cvg)
-print ">> Building exon-exon junction tables..."
+print(">> Building exon-exon junction tables...")
 exon_exon_t = util.build_junc_table(exon_exon_cvg)
-print ">> Building exon-intron junction tables..."
+print(">> Building exon-intron junction tables...")
 exon_intron_t = util.build_exon_intron_table(exon_wao_cvg, intron_wao_cvg, chr_file)
-print ">> Building gene_fpkm tables..."
+print(">> Building gene_fpkm tables...")
 fpkm_t = util.build_fpkm_table_from_stringtie(open(args.fpkm_arg))
-print ">> Building gene length tables..."
+print(">> Building gene length tables...")
 gene_length_t = util.build_gene_length_table(open("%s/%s_gene_length.txt" % (args.ref_dir, args.hg_arg)))
-print ">> Building mrna tables..."
+print(">> Building mrna tables...")
 mrna_t = util.build_mrna_table(open("%s/%s_select_feature_lengths" % (args.ref_dir, args.hg_arg)))
-print ">> Merging tables into output file..."
+print(">> Merging tables into output file...")
 out_file = open(args.sample_name + "_intron_analysis.txt", "w+")
 util.do_analysis(introns_id_f, exon_t, exon_exon_t, exon_intron_t, fpkm_t, gene_length_t, mrna_t, out_file, args.sample_name)
-print ">> Computing total coverage..."
+print(">> Computing total coverage...")
 total_output = open(args.sample_name + "_total_cvg.txt", "w+")
 util.compute_total_cvg(total_cvg, total_output)
 
-print ">> %s intron analysis finished." % args.sample_name
+print(">> %s intron analysis finished." % args.sample_name)

@@ -47,7 +47,7 @@ def get_chr_list(wao_file):
     for line in wao_file:
         chr_table[line.split("\t")[0].strip()] = None
 
-    print ("\t Built chromosome list.")
+    print("\t Built chromosome list.")
     return chr_table.keys()
 
 def build_chr_table(wao_file, chr_name):
@@ -137,8 +137,8 @@ def build_fpkm_table_from_stringtie(fpkm_file):
         fpkm = splitted[7].strip()
 
         if gene_name in table:
-            print (">> stringtie file has duplicate genes! Exiting...")
-            print (gene_name)
+            print(">> stringtie file has duplicate genes! Exiting...")
+            print(gene_name)
             exit(1)
 
         table[gene_name] = {"fpkm": fpkm}
@@ -164,7 +164,7 @@ def build_fpkm_table_from_cufflinks(fpkm_file):
         fpkm = splitted[9].strip()
 
         if gene_name in table:
-            print (">> gene.fpkm_tracking has duplicate genes! Exiting...")
+            print(">> gene.fpkm_tracking has duplicate genes! Exiting...")
             exit(1)
 
         table[gene_name] = {"fpkm": fpkm}
@@ -217,7 +217,7 @@ def build_mrna_table(mrna_file):
         mrna_length = splitted[2].strip()
 
         if gene_ID in table:
-            print( ">> Duplicate gene_ID in %s. Exiting..." % mrna_file.name)
+            print(">> Duplicate gene_ID in %s. Exiting..." % mrna_file.name)
             exit(1)
 
         table[gene_ID] = {"length": mrna_length}
@@ -359,7 +359,7 @@ def append_id(map_file, bed_file, col):
             output.write(line.strip() + "\t" + "-" + "\n")
             missing +=1
 
-    print( ">> Total missing for %s : %s" % (bed_file.name, missing))
+    print(">> Total missing for %s : %s" % (bed_file.name, missing))
     return output
 
 def check_intron_integrity(intron_line, intron_key,
@@ -384,9 +384,9 @@ def check_intron_integrity(intron_line, intron_key,
 
     if not (junc_start == up_exon_start <= up_exon_stop <= intron_start <= intron_stop <=
             down_exon_start <= down_exon_stop == junc_stop):
-        print (">> The following assertion failed:")
-        print (">> junc_start == up_exon_start <= up_exon_stop <= intron_start <= intron_stop <= down_exon_start <= down_exon_stop == junc_stop")
-        print (">> %s == %s <= %s <= %s <= %s <= %s <= %s == %s" % \
+        print(">> The following assertion failed:")
+        print(">> junc_start == up_exon_start <= up_exon_stop <= intron_start <= intron_stop <= down_exon_start <= down_exon_stop == junc_stop")
+        print(">> %s == %s <= %s <= %s <= %s <= %s <= %s == %s" % \
        (junc_start , up_exon_start , up_exon_stop , intron_start , intron_stop , down_exon_start , down_exon_stop , junc_stop))
         exit(1)
 
@@ -466,7 +466,7 @@ def do_analysis(intron_file, exon_table,
             down_exon_key = "exon:" + gene_ID + ":" + intron_number
             exon_exon_junc_table_key = "exon-exon:%s:%d:%s" % (gene_ID, int(intron_number) + 1, intron_number)
             if exon_exon_junc_table_key not in exon_exon_junc_table:
-                print (">> %s does not have flanking junctions! Exiting..." % exon_exon_junc_table_key)
+                print(">> %s does not have flanking junctions! Exiting..." % exon_exon_junc_table_key)
                 exit(1)
 
         intron_reads = splitted[10].strip()
