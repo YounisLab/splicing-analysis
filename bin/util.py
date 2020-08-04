@@ -492,11 +492,12 @@ def do_analysis(intron_file, exon_table,
         gene_length = gene_length_table[gene_ID]["length"].strip()
         mrna_length = mrna_table[gene_ID]["length"].strip()
 
-        if (float(intron_reads) + float(exon_intron_reads) + float(intron_exon_reads)) == 0:
+        numerator = float(up_exon_reads) + float(down_exon_reads) + float(flank_junc_reads)
+        denominator = numerator + float(intron_reads) + float(exon_intron_reads) + float(intron_exon_reads)
+        if denominator == 0:
             psi_value = "Inf"
         else:
-            psi_value = (float(up_exon_reads) + float(down_exon_reads) + float(flank_junc_reads)) \
-                    / (float(intron_reads) + float(exon_intron_reads) + float(intron_exon_reads))
+            psi_value = numerator / denominator
 
 #        check_intron_integrity(splitted, key,
 #                               exon_exon_junc_table_key, exon_exon_junc_table,
