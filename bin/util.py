@@ -442,11 +442,6 @@ def do_analysis(intron_file, exon_table,
     out_file.write(sample_name + "_gene_FPKM\t")
     out_file.write(sample_name + "_psi_value\n")
 
-    # out_file.write("gene_name\tgene_ID\tintron_number\tintron_reads\tintron_length\t")
-    # out_file.write("flanking_junc_reads\texon_intron_reads\tintron_exon_reads\t")
-    # out_file.write("downstream_exon_reads\tupstream_exon_reads\t")
-    # out_file.write("downstream_exon_length\tupstream_exon_length\tgene_FPKM\tgene_length\tmrna_length\n")
-
     intron_file.seek(0)
     for line in intron_file.readlines():
         splitted = line.split("\t")
@@ -498,10 +493,6 @@ def do_analysis(intron_file, exon_table,
             psi_value = "Inf"
         else:
             psi_value = numerator / denominator
-
-#        check_intron_integrity(splitted, key,
-#                               exon_exon_junc_table_key, exon_exon_junc_table,
-#                               up_exon_key, down_exon_key, exon_table)
 
         out = gene_name + "\t" + gene_ID  + ":" + intron_number + "\t" + intron_length + "\t"  \
         + up_exon_len + "\t" + down_exon_len + "\t" \
